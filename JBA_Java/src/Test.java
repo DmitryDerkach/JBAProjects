@@ -7,7 +7,6 @@ public class Test {
 	}
 	public enum Properties{
 		BUZZ, DUCK, PALINDROMIC, GAPFUL,SPY, EVEN, ODD, SQUARE, SUNNY, JUMPING, HAPPY, SAD;
-		
 	}
 	private static long value = 0;// Перве число
 	private static long itterator = 0;//Второе число
@@ -42,34 +41,58 @@ public class Test {
 		}
 		/*All other cases*/
 		while (itterator != 0) {
+			ArrayList<String> containerWithPlusProperties = new ArrayList<String>();
+			ArrayList<String> containerWithMinusProperties = new ArrayList<String>();
 			if (inputDataContainer.length > 2) {
+				for (int i = 2; i < inputDataContainer.length; i++) {
+					if (inputDataContainer[i].startsWith("-")) {
+						containerWithMinusProperties.add(inputDataContainer[i]);
+					} else {
+						containerWithPlusProperties.add(inputDataContainer[i]);
+					}
+				}
 				boolean flag = false;
 				repeat:{
-				for (int i = 2; i < inputDataContainer.length; i++) {
-					flag = triggerSpecificChecker(inputDataContainer[i]);
+				for (int i = 0; i < containerWithPlusProperties.size(); i++) {
+					flag = triggerSpecificChecker(containerWithPlusProperties.get(i));
 					if (!flag) {
 						value++;
 						break repeat;
 					}
 				}
 				}
+				if (containerWithPlusProperties.size() == 0) {
+					flag = true;
+				}
 				if (flag) {
-					/*дописать провекру на убирание*/
-					
-					output();
-					value++;
-					itterator--;
+					repeatV2:{
+					boolean remover = false;
+					for (int i = 0; i < containerWithMinusProperties.size(); i++) {
+						remover = triggerSpecificChecker(containerWithMinusProperties.get(i).substring(1));
+						if (remover == true) {
+							break;
+						}
+					}	
+					if (!remover) {
+						output();
+						value++;
+						itterator--;
+					} else {
+						value++;
+						break repeatV2;
+					}
+					}
 				} 
 				if (itterator == 0) {
 					break point;
 				}
-			} else {
+				} else {
 					output();
 					value++;
 					itterator--;
-					if (itterator == 0) {
-						break point;
-					}
+				if (itterator == 0) {
+					break point;
+				}
 			}
 		}
 		/*Ending*/
@@ -116,7 +139,8 @@ public class Test {
 				for (int i = 2; i < inputDataContainer.length; i++) {
 					boolean trigger = false;
 					for (int j = 0; j < propertiesDataContainer.length; j++) {
-						if (inputDataContainer[i].equalsIgnoreCase(propertiesDataContainer[j].toString())) {
+						if (inputDataContainer[i].equalsIgnoreCase(propertiesDataContainer[j].toString()) ||
+							inputDataContainer[i].equalsIgnoreCase("-" + propertiesDataContainer[j].toString())){
 							trigger = true;		
 						}
 					}
@@ -142,30 +166,45 @@ public class Test {
 				}
 				for(int i = 2; i < inputDataContainer.length; i++) {
 					for (int j = 0; j < inputDataContainer.length; j++) {
-						if(inputDataContainer[i].equalsIgnoreCase("EVEN") && inputDataContainer[j].equalsIgnoreCase("ODD")) {
+						if(inputDataContainer[i].equalsIgnoreCase("EVEN") && inputDataContainer[j].equalsIgnoreCase("ODD") ||
+						   inputDataContainer[i].equalsIgnoreCase("-EVEN") && inputDataContainer[j].equalsIgnoreCase("-ODD")) {
 							System.out.println("The request contains mutually exclusive properties: [" + inputDataContainer[i] + ", "
 												+ inputDataContainer[j] + "]");
 							System.out.println("There are no numbers with these properties.");
+							System.out.println();
 							throw new Test.MyExeption();
 						}
-						if(inputDataContainer[i].equalsIgnoreCase("DUCK") && inputDataContainer[j].equalsIgnoreCase("SPY")) {
+						if(inputDataContainer[i].equalsIgnoreCase("DUCK") && inputDataContainer[j].equalsIgnoreCase("SPY") ||
+						   inputDataContainer[i].equalsIgnoreCase("-DUCK") && inputDataContainer[j].equalsIgnoreCase("-SPY")) {
 							System.out.println("The request contains mutually exclusive properties: [" + inputDataContainer[i] + ", "
 												+ inputDataContainer[j] + "]");
 							System.out.println("There are no numbers with these properties.");
+							System.out.println();
 							throw new Test.MyExeption();
 						}
 						if(inputDataContainer[i].equalsIgnoreCase("SUNNY") && inputDataContainer[j].equalsIgnoreCase("SQUARE")) {
 							System.out.println("The request contains mutually exclusive properties: [" + inputDataContainer[i] + ", "
 												+ inputDataContainer[j] + "]");
 							System.out.println("There are no numbers with these properties.");
+							System.out.println();
 							throw new Test.MyExeption();
 						}
-						if(inputDataContainer[i].equalsIgnoreCase("HAPPY") && inputDataContainer[j].equalsIgnoreCase("SAD")) {
+						if(inputDataContainer[i].equalsIgnoreCase("HAPPY") && inputDataContainer[j].equalsIgnoreCase("SAD") ||
+						   inputDataContainer[i].equalsIgnoreCase("-HAPPY") && inputDataContainer[j].equalsIgnoreCase("-SAD")) {
 							System.out.println("The request contains mutually exclusive properties: [" + inputDataContainer[i] + ", "
 												+ inputDataContainer[j] + "]");
 							System.out.println("There are no numbers with these properties.");
+							System.out.println();
 							throw new Test.MyExeption();
 						}
+						if(inputDataContainer[i].equalsIgnoreCase("-" + inputDataContainer[j])) {
+							System.out.println("The request contains mutually exclusive properties: [" + inputDataContainer[i] + ", "
+												+ inputDataContainer[j] + "]");
+							System.out.println("There are no numbers with these properties.");
+							System.out.println();
+							throw new Test.MyExeption();
+						}
+						
 					}
 				}	
 			}//inputRest	
