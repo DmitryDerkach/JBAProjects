@@ -6,7 +6,7 @@ public class Test {
 		
 	}
 	public enum Properties{
-		BUZZ, DUCK, PALINDROMIC, GAPFUL,SPY, EVEN, ODD, SQUARE, SUNNY, JUMPING;
+		BUZZ, DUCK, PALINDROMIC, GAPFUL,SPY, EVEN, ODD, SQUARE, SUNNY, JUMPING, HAPPY, SAD;
 		
 	}
 	private static long value = 0;// Перве число
@@ -54,6 +54,8 @@ public class Test {
 				}
 				}
 				if (flag) {
+					/*дописать провекру на убирание*/
+					
 					output();
 					value++;
 					itterator--;
@@ -62,14 +64,12 @@ public class Test {
 					break point;
 				}
 			} else {
-				while (itterator!=0) {
 					output();
 					value++;
 					itterator--;
 					if (itterator == 0) {
 						break point;
 					}
-				}
 			}
 		}
 		/*Ending*/
@@ -126,7 +126,7 @@ public class Test {
 				}
 				if (tempcontainer.size() == 1) {
 					System.out.println("The property [" + tempcontainer.get(0) + "] is wrong.");
-					System.out.println("Available properties: [BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, EVEN, ODD, SQUARE, SUNNY, JUMPING]");
+					System.out.println("Available properties: [BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, EVEN, ODD, SQUARE, SUNNY, JUMPING, HAPPY, SAD]");
 					System.out.println();
 					throw new Test.MyExeption();
 				} 
@@ -136,7 +136,7 @@ public class Test {
 						System.out.print(tempcontainer.get(i) + " ");
 					}
 					System.out.println("] are wrong.");
-					System.out.println("Available properties: [BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, EVEN, ODD, SQUARE, SUNNY, JUMPING]");
+					System.out.println("Available properties: [BUZZ, DUCK, PALINDROMIC, GAPFUL, SPY, EVEN, ODD, SQUARE, SUNNY, JUMPING, HAPPY, SAD]");
 					System.out.println();
 					throw new Test.MyExeption();
 				}
@@ -155,6 +155,12 @@ public class Test {
 							throw new Test.MyExeption();
 						}
 						if(inputDataContainer[i].equalsIgnoreCase("SUNNY") && inputDataContainer[j].equalsIgnoreCase("SQUARE")) {
+							System.out.println("The request contains mutually exclusive properties: [" + inputDataContainer[i] + ", "
+												+ inputDataContainer[j] + "]");
+							System.out.println("There are no numbers with these properties.");
+							throw new Test.MyExeption();
+						}
+						if(inputDataContainer[i].equalsIgnoreCase("HAPPY") && inputDataContainer[j].equalsIgnoreCase("SAD")) {
 							System.out.println("The request contains mutually exclusive properties: [" + inputDataContainer[i] + ", "
 												+ inputDataContainer[j] + "]");
 							System.out.println("There are no numbers with these properties.");
@@ -184,14 +190,83 @@ public class Test {
 		return inputDataContainer;
 	}//Скобка getValue
 	/*Check Methods*/
+	public static boolean checkHappy(long value) {	
+		ArrayList<String> container = new ArrayList<String>();
+		ArrayList<Integer> storage = new ArrayList<Integer>();
+		int currentSum;
+		do {
+			currentSum = 0;
+			container.removeAll(container);
+			storage.removeAll(storage);
+			int itterator = 0;
+			do {
+				container.add(String.valueOf(value).charAt(itterator) + "");
+				itterator++;
+			} while (String.valueOf(value).length() != itterator);
+			for (int i = 0; i < container.size(); i++) {
+				storage.add(Integer.parseInt(container.get(i)));
+			}
+			for (int i = 0; i < storage.size(); i++) {
+				currentSum += storage.get(i)*storage.get(i);
+			}
+			if (currentSum / 10 != 0) {
+				value = currentSum;
+				continue;
+			} 
+		} while (currentSum / 10 != 0);
+		if (currentSum == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public static boolean checkSad(long value) {	
+		ArrayList<String> container = new ArrayList<String>();
+		ArrayList<Integer> storage = new ArrayList<Integer>();
+		int currentSum;
+		do {
+			currentSum = 0;
+			container.removeAll(container);
+			storage.removeAll(storage);
+			int itterator = 0;
+			do {
+				container.add(String.valueOf(value).charAt(itterator) + "");
+				itterator++;
+			} while (String.valueOf(value).length() != itterator);
+			for (int i = 0; i < container.size(); i++) {
+				storage.add(Integer.parseInt(container.get(i)));
+			}
+			for (int i = 0; i < storage.size(); i++) {
+				currentSum += storage.get(i)*storage.get(i);
+			}
+			if (currentSum / 10 != 0) {
+				value = currentSum;
+				continue;
+			} 
+		} while (currentSum / 10 != 0);
+		if (currentSum == 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 	public static boolean checkJumping(long value) {
 		boolean flag = true;
 		String tempcontainer = String.valueOf(value);
-		for (int i = 1; i < tempcontainer.length() - 1; i++) {
-			if ((Math.abs((long)tempcontainer.charAt(i) - (long)tempcontainer.charAt(i+1)) != 1) || 
-				(Math.abs((long)tempcontainer.charAt(i) - (long)tempcontainer.charAt(i-1)) != 1)) {	
-				flag = false;
-			}	
+		if (tempcontainer.length() >= 3 ||tempcontainer.length() == 1) {
+			for (int i = 1; i < tempcontainer.length() - 1; i++) {
+				if ((Math.abs((long)tempcontainer.charAt(i) - (long)tempcontainer.charAt(i+1)) != 1) || 
+					(Math.abs((long)tempcontainer.charAt(i) - (long)tempcontainer.charAt(i-1)) != 1)) {	
+					flag = false;
+				}	
+			}
+		}
+		if (tempcontainer.length() == 2) {
+			for (int i = 0; i < tempcontainer.length() - 1; i++) {
+				if ((Math.abs((long)tempcontainer.charAt(i) - (long)tempcontainer.charAt(i+1)) != 1)) {	
+					flag = false;
+					}	
+			}
 		}
 		return flag;
 	}
@@ -240,12 +315,16 @@ public class Test {
 		return trigger;
 	}
 	public static boolean checkGapful(long value) {
-		String tempString  = String.valueOf(value);
-		StringBuilder  strb = new StringBuilder();
-		strb.append(tempString.charAt(0)).append(tempString.charAt(tempString.length() - 1));
-		Integer sum = Integer.parseInt(strb.toString());
-		if (value % (int) sum == 0) {
-			return true;
+		if (value / 10 >= 10) {
+			String tempString  = String.valueOf(value);
+			StringBuilder  strb = new StringBuilder();
+			strb.append(tempString.charAt(0)).append(tempString.charAt(tempString.length() - 1));
+			Integer sum = Integer.parseInt(strb.toString());
+			if (value % (int) sum == 0) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
@@ -270,20 +349,22 @@ public class Test {
 	public static void oneNumberOutput() {
 		StringBuilder output = new StringBuilder();
 		System.out.println("Properties of " + value);
-		output = checkEven(value) == true ? output.append("even: true \n") : output.append("even: false \n");
-		output = checkOdd(value) == true ? output.append("odd: true \n") : output.append("odd: false \n");
-		output = checkBuzz(value) == true ? output.append("buzz: true \n") : output.append("buzz: false \n");
-		output = checkDuck(value) == true ? output.append("duck: true \n") : output.append("duck: false \n");
-		output = checkPalindromic(value) == true ? output.append("palindromic: true \n") : output.append("palindromic: false \n");
+		output = checkEven(value) ? output.append("even: true \n") : output.append("even: false \n");
+		output = checkOdd(value) ? output.append("odd: true \n") : output.append("odd: false \n");
+		output = checkBuzz(value) ? output.append("buzz: true \n") : output.append("buzz: false \n");
+		output = checkDuck(value) ? output.append("duck: true \n") : output.append("duck: false \n");
+		output = checkPalindromic(value) ? output.append("palindromic: true \n") : output.append("palindromic: false \n");
 		if (String.valueOf(value).length()>=3) {
-			output = checkGapful(value) == true ? output.append("gapful: true \n") : output.append("gapful: false \n");
+			output = checkGapful(value) ? output.append("gapful: true \n") : output.append("gapful: false \n");
 		} else {
 			output.append("gapful: false \n");
 		}
-		output = checkSpy(value) == true ? output.append("spy: true \n") : output.append("spy: false \n");
-		output = checkSquare(value) == true ? output.append("square: true \n") : output.append("square: false \n");
-		output = checkSunny(value) == true ? output.append("sunny: true \n") : output.append("sunny: false \n");
-		output = checkJumping(value) == true ? output.append("jumping: true \n") : output.append("jumping: false \n");
+		output = checkSpy(value) ? output.append("spy: true \n") : output.append("spy: false \n");
+		output = checkSquare(value) ? output.append("square: true \n") : output.append("square: false \n");
+		output = checkSunny(value) ? output.append("sunny: true \n") : output.append("sunny: false \n");
+		output = checkJumping(value) ? output.append("jumping: true \n") : output.append("jumping: false \n");
+		output = checkHappy(value) ? output.append("happy: true \n") : output.append("happy: false \n");
+		output = checkSad(value) ? output.append("sad: true \n") : output.append("sad: false \n");
 		System.out.println(output);
 	}
 	public static void output() {
@@ -330,6 +411,14 @@ public class Test {
 		if (checkJumping(value)) {
 			System.out.print("jumping; ");
 		}
+		/*Happy Checker*/
+		if (checkHappy(value)) {
+			System.out.print("happy; ");
+		}
+		/*Sad Checker*/
+		if (checkSad(value)) {
+			System.out.print("sad; ");
+		}
 		System.out.println();
 	}
 	public static boolean triggerSpecificChecker(String property) {
@@ -363,6 +452,12 @@ public class Test {
 		}
 		if ("Jumping".equalsIgnoreCase(property)) {
 			flag = checkJumping(value);
+		}
+		if ("Happy".equalsIgnoreCase(property)) {
+			flag = checkHappy(value);
+		}
+		if ("Sad".equalsIgnoreCase(property)) {
+			flag = checkSad(value);
 		}
 		return flag;
 	}
