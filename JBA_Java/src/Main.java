@@ -22,6 +22,7 @@ public class Main {
 					break point;
 				} catch (InputMismatchException e) {
 					System.out.println("You should enter numbers!");
+					sc.nextLine();
 					break point;
 				}
 				Main.InnerClass.gridOutput();
@@ -39,6 +40,10 @@ public class Main {
 		public static boolean oSequence = false;
 		
 		public static String[][] gridChange(int a, int b) throws MyExeption {
+			if ((a > 3 || b > 3) || (a < 1 || b < 1)) {
+				System.out.println("Coordinates should be from 1 to 3!");
+				throw new MyExeption();
+			}
 			if (inputDataContainer[a-1][b-1].equals("X") || inputDataContainer[a-1][b-1].equals("O")) {
 				System.out.println("This cell is occupied! Choose another one!");
 				throw new MyExeption();
@@ -46,10 +51,6 @@ public class Main {
 			inputDataContainer[a-1][b-1] = "X";
 			return inputDataContainer;
 		}
-		
-		
-		
-		
 		public static String[][] fillingTheGrid() {
 			String inputLine = sc.nextLine();
 			char[] inputLineCharContainer = inputLine.toCharArray();
