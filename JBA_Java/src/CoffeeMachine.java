@@ -12,7 +12,7 @@ public class CoffeeMachine {
 		do {
 		breakpoint : {
 			try {
-				System.out.println("Write action (buy, fill, take): ");
+				System.out.println("Write action (buy, fill, take, remaining, exit): ");
 				String desiredAction = sc.next();
 				switch (desiredAction) {
 					case ("buy") : {
