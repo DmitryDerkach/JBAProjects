@@ -1,3 +1,4 @@
+package project_4;
 import java.util.Scanner;
 
 public class CoffeeMachine {
@@ -27,7 +28,7 @@ public class CoffeeMachine {
 						takeMoney();
 						break;
 					}
-					case ("remaning") : {
+					case ("remaining") : {
 						output();
 						break;
 					}
@@ -49,9 +50,9 @@ public class CoffeeMachine {
 	}
 	public static void buyCoffee() throws MyExeption {
 		System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
-		int desiredCoffee = sc.nextInt();
+		String desiredCoffee = sc.next();
 		switch (desiredCoffee) {
-			case (1) : {
+			case ("1") : {
 				int[] oneEspressoCup = {250, 16, 4};
 				if(Stock[0] >= oneEspressoCup[0] && Stock[2] >= oneEspressoCup[1] && Stock[3] >= 1) {
 					System.out.println("I have enough resources, making you a coffee!");
@@ -80,7 +81,7 @@ public class CoffeeMachine {
 					}
 				}
 			}// Case 1
-			case (2) : {
+			case ("2") : {
 				int[] oneLatteCup = {350, 75, 20, 7};
 				if (Stock[0] >= oneLatteCup[0] && Stock[1] >= oneLatteCup[1] && Stock[2] >= oneLatteCup[2] && Stock[3] >= 1) {
 					System.out.println("I have enough resources, making you a coffee!");
@@ -114,7 +115,7 @@ public class CoffeeMachine {
 					}
 				}
 			}// Case 2
-			case (3) : {
+			case ("3") : {
 				int[] oneCappuccinoCup = {200, 100, 12, 6};	
 				if(Stock[0] >= oneCappuccinoCup[0] && Stock[1] >= oneCappuccinoCup[1] && Stock[2] >= oneCappuccinoCup[2] && Stock[3] >= 1) {
 					System.out.println("I have enough resources, making you a coffee!");
