@@ -73,7 +73,7 @@ public class Main {
 					bullCounter++;
 				}
 			}
-			for (int i = 0; i < secretCode.length(); i++) {
+			for (int i = 0; i < secretCode.length(); i++) { 
 				if ((secretCode.contains(probabpleCode.charAt(i) + "")) && (secretCode.charAt(i) != probabpleCode.charAt(i))) {
 					cowCounter++;
 				}
