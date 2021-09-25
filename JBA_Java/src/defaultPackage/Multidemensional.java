@@ -105,7 +105,7 @@ public class Multidemensional {
     			}
     			
     		}
-		};
+		}; // End of <<actionsWithCard>> class
     }// End of cardOperations() method
     
 }//End of the class
