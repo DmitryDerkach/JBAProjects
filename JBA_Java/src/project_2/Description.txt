@@ -1,0 +1,59 @@
+Project: Amazing Numbers
+About:
+We use numbers every day. But do you know how many different properties they have? Let's take a look at some of the amazing properties of numbers. After completing this project, you will write a program that knows how to determine whether a number is Palindromic or Gapful, or how to distinguish Spy numbers from others. Numbers can be fascinating!
+
+This program can:
+1.	Welcome users;
+2.	Display the instructions;
+3.	Ask for a request;
+4.	If a user enters an empty request, print the instructions;
+5.	If the user enters zero, terminate the program;
+6.	If numbers are not natural, print the error message;
+7.	If an incorrect property is specified, print the error message and the list of available properties;
+8.	For one number, print the properties of the number;
+9.	For two numbers, print the properties of all numbers in the list;
+10.	For two numbers and two properties, print the list of numbers that contain the specified properties;
+11.	If a property is preceded by a minus, this property should not be present in a number;
+12.	If the user specifies mutually exclusive properties, abort the request and warn the user.
+13.	Once the request is processed, continue execution from step 3.
+
+Examples:
+The greater-than symbol followed by a space (> ) represents the user input. Note that it's not part of the input.
+
+Example 1:
+Welcome to Amazing Numbers!
+Supported requests:
+- enter a natural number to know its properties;
+- enter two natural numbers to obtain the properties of the list:
+  * the first parameter represents a starting number;
+  * the second parameter shows how many consecutive numbers are to be processed;
+- two natural numbers and properties to search for;
+- a property preceded by minus must not be present in numbers;
+- separate the parameters with one space;
+- enter 0 to exit.
+Enter a request: 1 5 -sunny -square
+
+               2 is even, palindromic, spy, jumping, sad
+               5 is odd, palindromic, spy, jumping, sad
+               6 is even, palindromic, spy, jumping, sad
+               7 is odd, buzz, palindromic, spy, jumping, happy
+              10 is even, duck, jumping, happy
+
+Enter a request: 1 10
+
+               1 is odd, palindromic, spy, square, jumping, happy
+               2 is even, palindromic, spy, jumping, sad
+               3 is odd, palindromic, spy, sunny, jumping, sad
+               4 is even, palindromic, spy, square, jumping, sad
+               5 is odd, palindromic, spy, jumping, sad
+               6 is even, palindromic, spy, jumping, sad
+               7 is odd, buzz, palindromic, spy, jumping, happy
+               8 is even, palindromic, spy, sunny, jumping, sad
+               9 is odd, palindromic, spy, square, jumping, sad
+              10 is even, duck, jumping, happy
+
+
+
+
+
+
