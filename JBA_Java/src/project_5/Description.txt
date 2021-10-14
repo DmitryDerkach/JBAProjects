@@ -1,0 +1,21 @@
+Project: Cinema Room Manager
+
+About:
+Cinema has been a part of the entertainment industry for a long time: a good movie is a way to escape reality and
+live through a variety of emotions. The best cinema experience you can get is probably in a cinema theatre. 
+In this project, you will create an application that helps manage a cinema theatre: sell tickets, check available
+seats, see sales statistics, and more.
+
+Learning outcomes:
+This project is a good opportunity to work with input and output in Java. You will deal with multi-dimensional 
+arrays and functions as well as loops and conditional statements.
+
+Program reads two positive integer numbers that represent the number of rows and seats in each row. 
+These numbers represent the coordinates of the seat according to which the program calculates the ticket price. 
+The ticket price is:
+•	If the total number of seats in the screen room is not more than 60, then the price of each ticket is 10 dollars.
+•	In a larger room, the tickets are 10 dollars for the front half of the rows and 8 dollars for the back half. 
+Please note that the number of rows can be odd, for example, 9 rows. In this case, the first half is the first 4 rows, 
+and the second half is the last 5 rows.
+
+
